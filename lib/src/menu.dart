@@ -9,10 +9,10 @@ part 'offset_methods.dart';
 
 /// This is the what contains both the widget you want to draw and the [MenuBar]
 class Menu extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
   /// This contains all of the info for rendering the Menu
-  final MenuBar menuBar;
+  final MenuBar? menuBar;
 
   /// This will draw the menu where you tap/click on the child widget instead of at a predefined alignment.  Default is `false`
   ///
@@ -38,7 +38,7 @@ class Menu extends StatefulWidget {
   final TapType tapType;
 
   const Menu({
-    Key key,
+    Key? key,
     this.child,
     this.menuBar,
     this.menuOverTap = false,
@@ -54,25 +54,23 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   final GlobalKey key = GlobalKey();
-  OverlayEntry itemEntry;
+  OverlayEntry? itemEntry;
   final layerLink = LayerLink();
 
   bool showMenu = false;
   // ignore: prefer_final_fields
-  static List<OverlayEntry> _overlays = [];
+  static List<OverlayEntry?> _overlays = [];
   final GlobalKey sizeKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       key: key,
-      onTap: widget.tapType == TapType.tap && !widget.menuOverTap
-          ? buildMenu
-          : null,
+      onTap: widget.tapType == TapType.tap && !widget.menuOverTap ? buildMenu : null,
       onDoubleTap: widget.tapType == TapType.doubleTap ? buildMenu : null,
       onSecondaryTapDown: (details) {
         if (widget.tapType == TapType.secondaryTap && !widget.menuOverTap) {
-          return buildMenu;
+          return buildMenu();
         }
         return null;
       },
@@ -82,12 +80,11 @@ class _MenuState extends State<Menu> {
               buildMenu(tapOffset: details.localPosition);
             }
           : null,
-      onSecondaryTapUp:
-          widget.tapType == TapType.secondaryTap && widget.menuOverTap
-              ? (details) {
-                  buildMenu(tapOffset: details.localPosition);
-                }
-              : null,
+      onSecondaryTapUp: widget.tapType == TapType.secondaryTap && widget.menuOverTap
+          ? (details) {
+              buildMenu(tapOffset: details.localPosition);
+            }
+          : null,
       behavior: HitTestBehavior.translucent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -107,7 +104,7 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  void buildMenu({Offset tapOffset}) {
+  void buildMenu({Offset? tapOffset}) {
     MenuAlignment _childAlignmentOnMenu;
     //Computes the child alignment point
     if (tapOffset != null) {
@@ -116,24 +113,21 @@ class _MenuState extends State<Menu> {
       if (widget.position == MenuPosition.inside) {
         _childAlignmentOnMenu = widget.menuAlignmentOnChild;
       } else {
-        _childAlignmentOnMenu =
-            childAlignmentOnMenu(widget.menuAlignmentOnChild);
+        _childAlignmentOnMenu = childAlignmentOnMenu(widget.menuAlignmentOnChild);
       }
     }
     // Gets the size of the parent
-    RenderBox renderObject = key.currentContext?.findRenderObject();
+    RenderBox renderObject = key.currentContext?.findRenderObject() as RenderBox;
     final bounds = renderObject.paintBounds;
 
     // Gets the size of the menu
-    RenderBox menuObject = sizeKey.currentContext?.findRenderObject();
+    RenderBox menuObject = sizeKey.currentContext?.findRenderObject() as RenderBox;
     final menuBounds = menuObject.paintBounds;
     Offset childOffset;
 
     // Computes the offset for the child in relation to the parent
     if (tapOffset != null) {
-      childOffset = tapOffset -
-          getOffsetByAlignment(menuBounds, MenuAlignment.center) -
-          widget.offset;
+      childOffset = tapOffset - getOffsetByAlignment(menuBounds, MenuAlignment.center) - widget.offset;
     } else {
       var newOffset = getOffsetByAlignment(menuBounds, _childAlignmentOnMenu);
       childOffset = -(widget.offset + newOffset);
@@ -147,12 +141,9 @@ class _MenuState extends State<Menu> {
           CompositedTransformFollower(
             link: layerLink,
             showWhenUnlinked: false,
-            offset: getOffsetByAlignment(
-                    bounds,
-                    widget.menuOverTap
-                        ? MenuAlignment.topLeft
-                        : widget.menuAlignmentOnChild) +
-                childOffset,
+            offset:
+                getOffsetByAlignment(bounds, widget.menuOverTap ? MenuAlignment.topLeft : widget.menuAlignmentOnChild) +
+                    childOffset,
             child: _MenuBar(
               menuBar: widget.menuBar,
               dismiss: dismiss,
@@ -163,7 +154,7 @@ class _MenuState extends State<Menu> {
       ),
     );
 
-    Overlay.of(context).insert(itemEntry);
+    Overlay.of(context)!.insert(itemEntry!);
     _overlays.add(itemEntry);
   }
 
