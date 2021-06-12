@@ -1,9 +1,9 @@
 name: flutter_anywhere_menus
 description: Menus Anywhere!  Now create floating menus that automatically position themselves by the parent widget or by touch/click location.  
-version: 0.1.2
-homepage: https://github.com/knyghtryda/flutter_anywhere_menus
-repository: https://github.com/knyghtryda/flutter_anywhere_menus
-issue_tracker: https://github.com/knyghtryda/flutter_anywhere_menus/issues
+version: 0.2.1
+homepage: https://github.com/pram507/flutter_anywhere_menus
+repository: https://github.com/pram507/flutter_anywhere_menus
+issue_tracker: https://github.com/pram507/flutter_anywhere_menus/issues
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
