@@ -96,6 +96,7 @@ class _MenuState extends State<Menu> {
             child: _MenuBar(
               menuKey: sizeKey,
               menuBar: widget.menuBar,
+              dismiss: () => dismiss(),
               menuAlignment: childAlignmentOnMenu(widget.menuAlignmentOnChild),
             ),
           ),
