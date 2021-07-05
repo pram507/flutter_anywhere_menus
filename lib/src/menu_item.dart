@@ -8,15 +8,9 @@ class MenuItem {
   final EdgeInsets? padding;
   final Function? onTap;
   final Function? onLongPress;
+  final bool? dismissOnClick;
 
-  const MenuItem(
-      {this.onTap,
-      this.onLongPress,
-      this.child,
-      this.backgroundColor,
-      Color? splashColor,
-      this.padding})
-      : _splashColor = splashColor ?? Colors.blueGrey;
+  const MenuItem({this.onTap, this.onLongPress, this.child, this.backgroundColor, Color? splashColor, this.padding, this.dismissOnClick = true}) : _splashColor = splashColor ?? Colors.blueGrey;
 }
 
 class _MenuItem extends StatefulWidget {
@@ -43,8 +37,9 @@ class __MenuItemState extends State<_MenuItem> {
       child: InkWell(
         onTap: () {
           if (widget.menuItem!.onTap != null) widget.menuItem!.onTap!();
-          //TODO: figure out what to do with dismissing after tap.  Maybe just leave as is?
-          //widget.dismiss();
+          if (widget.menuItem?.dismissOnClick ?? true) {
+            widget.dismiss!();
+          }
         },
         onLongPress: () {
           if (widget.menuItem!.onLongPress != null) {
@@ -54,9 +49,7 @@ class __MenuItemState extends State<_MenuItem> {
         splashColor: widget.menuItem!._splashColor,
         child: Center(
           child: Padding(
-            padding: widget.menuItem!.padding ??
-                widget.itemPadding ??
-                EdgeInsets.all(0),
+            padding: widget.menuItem!.padding ?? widget.itemPadding ?? EdgeInsets.all(0),
             child: widget.menuItem!.child,
           ),
         ),

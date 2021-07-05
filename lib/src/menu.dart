@@ -117,11 +117,11 @@ class _MenuState extends State<Menu> {
       }
     }
     // Gets the size of the parent
-    RenderBox renderObject = key.currentContext?.findRenderObject() as RenderBox;
+    var renderObject = key.currentContext?.findRenderObject() as RenderBox;
     final bounds = renderObject.paintBounds;
 
     // Gets the size of the menu
-    RenderBox menuObject = sizeKey.currentContext?.findRenderObject() as RenderBox;
+    var menuObject = sizeKey.currentContext?.findRenderObject() as RenderBox;
     final menuBounds = menuObject.paintBounds;
     Offset childOffset;
 
@@ -141,9 +141,7 @@ class _MenuState extends State<Menu> {
           CompositedTransformFollower(
             link: layerLink,
             showWhenUnlinked: false,
-            offset:
-                getOffsetByAlignment(bounds, widget.menuOverTap ? MenuAlignment.topLeft : widget.menuAlignmentOnChild) +
-                    childOffset,
+            offset: getOffsetByAlignment(bounds, widget.menuOverTap ? MenuAlignment.topLeft : widget.menuAlignmentOnChild) + childOffset,
             child: _MenuBar(
               menuBar: widget.menuBar,
               dismiss: dismiss,

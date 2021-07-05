@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -101,20 +101,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        children: [
-                          Icon(Icons.access_alarms),
-                          Icon(Icons.account_circle)
-                        ],
+                        children: [Icon(Icons.access_alarms), Icon(Icons.account_circle)],
                       )),
                 )),
             Menu(
               child: MaterialButton(
+                onPressed: null,
                 child: Text('Show Basic Menu'),
               ),
               menuBar: MenuBar(),
             ),
             Menu(
               child: MaterialButton(
+                onPressed: null,
                 child: Text('Dem Fancy Menus'),
               ),
               menuBar: MenuBar(
@@ -129,16 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Menu(
                       offset: Offset(0, 20),
                       child: Icon(Icons.colorize, color: Colors.grey[600]),
-                      menuBar: MenuBar(
-                          drawArrow: true,
-                          drawDivider: true,
-                          maxThickness: 68,
-                          orientation: MenuOrientation.vertical,
-                          menuItems: [MenuItem(child: Icon(Icons.add))]),
+                      menuBar: MenuBar(drawArrow: true, drawDivider: true, maxThickness: 68, orientation: MenuOrientation.vertical, menuItems: [MenuItem(child: Icon(Icons.add))]),
                     ),
                   ),
-                  MenuItem(
-                      child: Icon(Icons.content_copy, color: Colors.grey[600])),
+                  MenuItem(child: Icon(Icons.content_copy, color: Colors.grey[600])),
                 ],
               ),
             ),
@@ -151,6 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu TL'),
                       ),
                       menuBar: menuBar,
@@ -160,6 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       tapType: TapType.tap,
                       offset: Offset(0, 10),
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu T'),
                       ),
                       menuBar: menuBar,
@@ -168,6 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu TR'),
                       ),
                       menuBar: menuBar,
@@ -181,6 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu CL'),
                       ),
                       menuBar: menuBar,
@@ -189,6 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu C'),
                       ),
                       menuBar: menuBar,
@@ -197,6 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu CR'),
                       ),
                       menuBar: menuBar,
@@ -210,6 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu BL'),
                       ),
                       menuBar: menuBar,
@@ -218,6 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu BC'),
                       ),
                       menuBar: menuBar,
@@ -226,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Menu(
                       tapType: TapType.tap,
                       child: MaterialButton(
+                        onPressed: null,
                         child: Text('Show Menu BR'),
                       ),
                       menuBar: menuBar,
